@@ -31,7 +31,7 @@
         },
         "clusterNodeSize": {
             "type": "string",
-            "defaultValue": "Standard_D12",
+            "defaultValue": "Standard_D13_v2",
             "allowedValues": [
                 "Standard_D4_v2",
                 "Standard_D12_v2",
@@ -44,16 +44,23 @@
         },
         "clusterWorkerNodeCount": {
             "type": "int",
-            "defaultValue": 2,
+            "defaultValue": 64,
             "metadata": {
                 "description": "The number of worker nodes in the HDInsight cluster."
             }
         },
-        "ScaleFactor": {
-            "type": "int",
-            "defaultValue": 10,
+        "workid": {
+            "type": "string",
+            "defaultValue": "400d18db-c5a0-4455-bc35-ae4c3bd07378",
             "metadata": {
-                "description": "TPCH Scale Factor"
+                "description": "workspaceid"
+            }
+        },
+    "workkey": {
+            "type": "string",
+            "defaultValue": "ixIs2b4/Mlu0g/4YFm+ywFqyHgGd8LAotylwwhAOWCgT5gbfYr9dFHURlAUV+eQVqXpW18b7bdIN/JpXUBMO3w==",
+            "metadata": {
+                "description": "workspacekey"
             }
         }
      },
@@ -115,9 +122,10 @@
                 },
                 "scriptActions": [
                   {
-                    "name": "TPCH Benchmark",
-                    "uri": "https://raw.githubusercontent.com/dharmeshkakadia/tpch-datagen-as-hive-query/master/azure/TPCH_installer.sh",
-                    "parameters": "[parameters('ScaleFactor')]"
+                    "name": "OMS Monitoring",
+                    "uri": "https://raw.githubusercontent.com/ashishthaps/hbase-utils/master/monitoring/installintractivehive.sh",
+                    "parameters": "[parameters('workid') ]"
+                      "parameters": "[parameters('workkey') ]"
                   }
                 ]
               },
